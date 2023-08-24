@@ -1,0 +1,239 @@
+/* Höhe des Menus korrigieren */
+.ui-page>.ui-header  {
+    height: 64px; 
+    margin:  0 0 0 0; 
+    background: #262626;
+}
+
+/* Menu einpassen */
+  .ui-page>.ui-header .ui-left {
+    margin: 0px 0 0 0px; 
+    float: left;
+  }
+
+
+.navigation {
+  height: 64px;
+  background: #262626;
+  margin-top: -5px;
+}
+
+.brand {
+  position: absolute;
+  right: 0;
+  padding-right: 20px;
+  padding-top: 5px;
+  float: left;
+  line-height: 66px; /*70px;*/
+  text-transform: uppercase;
+  font-size: 1.4em;
+}
+
+.brand a, .brand a:visited {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+
+.nav-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+nav {
+  float: right;
+  /* Vertikaler Bereich unter Burger-Symbol komplett als Menu */
+  background: #262626;
+  opacity: 0.91;
+  transition: all 300ms ease-in-out;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  float: left;
+  position: relative;
+}
+nav ul li a, nav ul li a:visited {
+  display: block;
+  padding: 0px 25px 0px 25px;
+  line-height: 70px;
+  background: #262626;
+  color: #ffffff;
+  text-decoration: none;
+  text-align: left;
+}
+
+nav ul li a:hover, nav ul li a:visited:hover {
+  background: #2581DC;
+  color: #ffffff ! important;
+}
+
+/* Automatisch öffnende Sub-Menus */
+/** ul.nav-list li:hover ul {
+  display: block;
+}  */
+
+/* Symbol für Kaskadenmenu */
+nav ul li a:not(:only-child):after, nav ul li a:visited:not(:only-child):after {
+  padding-left: 4px;
+  content: ' ▾';
+}
+
+nav ul li ul li {
+  min-width: 190px;
+}
+
+nav ul li ul li a {
+  padding: 15px;
+  line-height: 20px;
+  background: #262626; /* Einfarbiger Hintergrund bei Kaskadenmenu in nav-list */
+}
+
+.nav-dropdown {
+  position: absolute;
+  display: none;
+  z-index: 1;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+  opacity:0.91;
+  background: #262626; /* Einfarbiger Hintergrund bei Kaskadenmenu in Burger-Submenu */
+}
+
+.nav-mobile {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: linear-gradient(#3c3c3c,#111);
+  /* Größe Burger-Icon */
+  height: 64px;
+  width: 70px;
+}
+
+/* Burgermenu */
+@media only screen and (max-width: 998px) {
+
+  .nav-mobile {
+    display: block;
+  }
+
+  nav {
+    width: 100%;
+    padding: 70px 0 15px;
+    height: 1000px; /* Höhe des Menus im Burger über gesamte Höhe */
+  }
+
+   nav ul {
+    display: none;
+  }
+
+  nav ul li {
+    float: none;
+  }
+
+  nav ul li a {
+    padding: 15px;
+    line-height: 20px;
+  }
+  nav ul li ul li a {
+    padding-left: 45px; /* Eingerückte Untermenus im Burgermenu */
+  }
+  .nav-dropdown {
+    position: static;
+  }
+}
+
+/* Logo ausblenden */
+  .brand {
+    display: none;
+  }
+}
+
+* Klassisches horizontales Menu */
+@media screen and (min-width: 999px) {
+
+  .nav-list {
+    display: block !important; /* important: Fixing the disappearing navbar bug */
+  }
+
+  nav ul li a {
+    background-image: linear-gradient(#3c3c3c,#111);
+  }
+}
+
+/* Logo ausblenden */
+.brand {
+  display: none;
+}
+
+[id$="nav-toggle"] {
+  position: absolute;
+  left: 18px;
+  top: 22px;
+  cursor: pointer;
+  padding: 10px 35px 16px 0px;
+}
+
+[id$="nav-toggle"] span, [id$="nav-toggle"] span:before, [id$="nav-toggle"] span:after {
+  cursor: pointer;
+  border-radius: 1px;
+  height: 5px;
+  width: 35px;
+  background: #ffffff;
+  position: absolute;
+  display: block;
+  content: '';
+  transition: all 300ms ease-in-out;
+}
+
+/* Strich vom Burger-Symbol nach oben versetzt */
+[id$="nav-toggle"] span:before {
+  top: -10px; 
+}
+
+/* Horiz. Strich vom Burger-Symbol nach unten versetzt */
+[id$="nav-toggle"] span:after {
+  bottom: -10px; 
+}
+
+[id$="nav-toggle"].active span {
+  background-color: transparent;
+}
+
+/* Burger-Symbol nach X wechseln */
+[id$="nav-toggle"].active span:before, [id$="nav-toggle"].active span:after {
+  top: 0;
+}
+[id$="nav-toggle"].active span:before {
+  transform: rotate(45deg);
+}
+[id$="nav-toggle"].active span:after {
+  transform: rotate(-45deg);
+}
+article {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+/** Smartvisu Menu-Lasche eingefärbt lassen für aktive Seite */
+
+/* Übernommen von früherem Menu */
+/* Aktives Menu farbig hinterlegt lassen */
+.nav .menu-selected, .nav-list .menu-selected {
+    /*background-image: linear-gradient(#b2FF33,#91e12a);*/
+    background-image: linear-gradient(#ADD8E6,#ADD8F9);
+    color: #222 !important;
+    text-decoration:none;
+    text-shadow: none;
+}
+
+/* Aktives Menu: Schriftfarbe beim Hover setzen */
+.nav .menu-selected:hover, .nav-list .menu-selected:hover {
+   font-weight: bold ! important;
+   color: black ! important;
+}

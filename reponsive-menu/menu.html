@@ -1,0 +1,139 @@
+/** https://www.taniarascia.com/responsive-dropdown-navigation-bar/ */
+/** https://codepen.io/taniarascia/pen/dYvvYv/ */
+
+<section class="navigation">
+  <div class="nav-container">
+    <nav>
+      <div class="nav-mobile"><a id="{{ page }}-nav-toggle" ><span></span></a></div> 
+        <ul class="nav-list">
+          <li>
+            <a id="{{ page}}_menu-dashboard" class="{{ page in 'index.php' ? 'menu-selected' : ''}}" href="index.php">Home</a>
+          </li>
+
+          <li>
+            <a id="{{ page}}_menu-rooms" class="{{ page matches '/^(dg|eg|garten)$/' ? 'menu-selected' : ''}}" >Räume</a>
+            <ul class="nav-dropdown">
+              <li>
+                <a id="{{ page}}_menu-room-dg"   class="{{ page matches '/dg/' ? 'menu-selected' : ''}}" href="index.php?page=overview_dg">DG</a>
+              </li>
+              <li>
+                <a id="{{ page}}_menu-room-eg"   class="{{ page matches '/eg/' ? 'menu-selected' : ''}}" href="index.php?page=overview_eg">EG</a>
+              </li>
+              <li>
+                <a id="{{ page}}_menu-room-garten"   class="{{ page matches '/garten/' ? 'menu-selected' : ''}}" href="index.php?page=overview_garten">Außen</a>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <a id="{{ page}}_menu-sonos"  class="{{ page starts with 'index-sonos' ? 'menu-selected' : ''}}"         href="index.php?page=index-sonos">Musik</a>
+          </li>
+
+          <li>
+            <a id="{{ page}}_menu-telefon"  class="{{ page starts with 'phone_subpage' ? 'menu-selected' : ''}}"         href="index.php?page=phone_subpage_1">Telefon</a>
+          </li>
+
+          <li>
+            <a id="{{ page}}_menu-webcams"         class="{{ page matches '/^(webcam_haustuer|webcam_strasse|webcam_terrasse|webcams_web)$/' ? 'menu-selected' : ''}}" >Kamera</a>
+            <ul class="nav-dropdown">
+              <li>
+                <a id="{{ page}}_menu-webcam-haustuer"   class="{{ page matches '/webcam_haustuer/' ? 'menu-selected' : ''}}" href="index.php?page=webcam_haustuer">Haustür</a>
+              </li>
+              <li>
+                <a id="{{ page}}_menu-webcam-strasse"   class="{{ page matches '/webcam_strasse/' ? 'menu-selected' : ''}}" href="index.php?page=webcam_strasse">Strasse</a>
+              </li>
+              <li>
+                <a id="{{ page}}_menu-webcam-terrasse"   class="{{ page matches '/webcam_terrasse/' ? 'menu-selected' : ''}}" href="index.php?page=webcam_terrasse">Terrasse</a>
+              </li>
+              <li>
+                <a id="{{ page}}_menu-webcam-kueche"   class="{{ page matches '/webcam_kueche/' ? 'menu-selected' : ''}}" href="index.php?page=webcam_kueche">Küche</a>
+              </li>
+              <li>
+                <a id="{{ page}}_menu-webcams-web"   class="{{ page matches '/webcams_web/' ? 'menu-selected' : ''}}" href="index.php?page=webcams_web">Webcams</a>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <a id="{{ page}}_menu-weather"    class="{{ page starts with 'weather' ? 'menu-selected' : ''}}"             href="index.php?page=weather_current">Wetter</a>
+          </li>
+
+          <li>
+            <a id="{{ page}}_menu-settings"         class="{{ page matches '/^(theme_Einstellungen|theme_Timer|config|theme_Neustart)$/' ? 'menu-selected' : ''}}" >Einstellungen</a>
+            <ul class="nav-dropdown">
+              <li>
+                <a id="{{ page}}_menu-settings-Haus"   class="{{ page starts with 'theme_Einstellungen' ? 'menu-selected' : ''}}" href="index.php?page=theme_Einstellungen">Haus</a>
+              </li>
+              <li>
+                <a id="{{ page}}_menu-settings-Timer"   class="{{ page starts with 'theme_Timer' ? 'menu-selected' : ''}}" href="index.php?page=theme_Timer">Timer</a>
+              </li>
+              <li>
+                <a id="{{ page}}_menu-settings-smartvisu"   class="{{ page starts with 'config' ? 'menu-selected' : ''}}" href="index.php?page=config">smartVISU</a>
+              </li>
+          </ul>
+          </li>
+
+          <li>
+            <a id="{{ page}}_menu-status"         class="{{ page matches '/^(status_heizung|status_bmw)$/' ? 'menu-selected' : ''}}" href="#!">Status</a>
+            <ul class="nav-dropdown">
+              <li>
+                <a id="{{ page}}_menu-status-heizung"   class="{{ page matches '/status_heizung/' ? 'menu-selected' : ''}}" href="index.php?page=status_heizung">Heizung</a>
+              </li>
+
+            </ul>
+          </li>
+    </ul>
+  </nav>
+</div>
+</section>
+
+
+<script type="text/javascript">
+
+$(function() { // DOM ready
+
+  // If a link has a dropdown, add sub menu toggle.
+  $('[id^="{{ page }}"] nav ul li a:not(:only-child)').click(function(e) { 
+    // console.warn("Menu: Toggle .nav-dropdown: Submenu öffnen/schliessen von nav-dropdown und Event-Weiterleitung stoppen");
+    $(this).siblings('.nav-dropdown').toggle();
+    // Close one dropdown when selecting another
+    $('.nav-dropdown').not($(this).siblings()).hide(); 
+    e.stopPropagation();
+  });
+  
+  // Toggle open and close navigation bar on click / Menu ein/ausblenden
+   // Wechsel Hamburger to X toggle
+   $('#{{ page }}-nav-toggle').click(function() {
+      // console.warn("#{{ page }}-nav-toggle: Click");
+
+      if( $(this).hasClass( "active" ))
+        {
+           //Klasse aktive ist gesetzt -> X-Menu-Symbol geklickt -> Menu schliessen
+           // console.warn("  #{{ page }}-nav-toggle: Click  --> active gesetzt. Auf X geklickt.");
+           //$('.nav-dropdown').hide();
+           $(this).removeClass('active'); //Burger-Symbol nach X wechseln
+           $('nav ul').slideUp(); // Menu schliessen
+        } else {
+           //Klasse active nicht gesetzt -> Burger-Symbol aktiv -> Menu öffnen
+           // console.warn("  #{{ page }}-nav-toggle: Click  --> active nicht gesetzt. Auf Burger geklickt.");
+           $('nav ul').slideDown(); // Menu oeffnen
+           $(this).addClass('active'); //X-Symbol nach Burger wechseln
+           $('.nav-dropdown').hide(); //Kaskadenmenus initial geschlossen
+        }
+  });
+
+  //Wenn link ungleich Kaskadenmenu gefrück, Burgermenu schließen
+  $('[id^="{{ page }}"] .nav-list a:only-child').click(function () {
+    // console.warn("{{ page }}: Link geklickt.");
+    $('.nav-dropdown').hide();
+    //Wenn Klick auf Link im Burgermenu
+    if ( $('#{{ page }}-nav-toggle').hasClass( "active" )) {
+       $('nav ul').slideUp(); // Menu schliessen
+       $('#{{ page }}-nav-toggle').removeClass('active');
+    }
+   });
+
+}); // end DOM ready
+
+</script>
+
